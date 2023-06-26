@@ -1,0 +1,68 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: Helvetica;
+    color: #333;
+    box-sizing: border-box;
+}
+body{
+    background-image: url("../img/bg.jpg");
+    background-position: center;
+}
+
+button{
+    background-color: #fdfdfd;
+    color: #102F5e;
+    border: 2px solid #102F5e;
+    padding: .3rem .6rem;
+    font: 1rem;
+    cursor: pointer;  /*Trocar cursor ao colocar mause em cima do botao*/
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+}
+
+button:hover{
+    background-color: #102F5e;
+    color: white;
+}
+
+button:hover > i{
+    color: white;
+}
+
+button > i{
+    color: #102F5e;
+    font-weight: bold;
+    pointer-events: none; /*Com essa opção de clicar no icone o evento também vai ser disparado, desabilitandos os eventos do icone*/
+}
+
+input, select{
+    padding: .25rem;  /*Afastar o placeholder da margem do input e select*/
+}
+.hide{
+    display: none; /*Esconder o fomulario de edição*/
+}
+
+/* Todo Header */
+
+.todo_container{
+    max-width: 450px;
+    margin: 3rem auto;
+    background-color: #fdfdfd;
+    padding: 1.5rem;
+    border-radius: 15px;
+}
+
+.todo_container header{
+    text-align: center;
+    padding: 0 1rem 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+/* Todo Header */
+
+#todo_form #edit_form{
+    
+}
