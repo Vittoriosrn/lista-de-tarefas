@@ -2,18 +2,19 @@
     padding: 0;
     margin: 0;
     font-family: Helvetica;
-    color: #333;
+    color: #000000ce;
     box-sizing: border-box;
 }
 body{
     background-image: url("../img/bg.jpg");
-    background-position: center;
+    background-position: unset;
 }
 
 button{
     background-color: #fdfdfd;
-    color: #102F5e;
-    border: 2px solid #102F5e;
+    color: #3D43A9;
+    border-radius: 5px;
+    border: 2px solid #3D43A9;
     padding: .3rem .6rem;
     font: 1rem;
     cursor: pointer;  /*Trocar cursor ao colocar mause em cima do botao*/
@@ -24,7 +25,7 @@ button{
 }
 
 button:hover{
-    background-color: #102F5e;
+    background-color: #3D43A9;
     color: white;
 }
 
@@ -33,12 +34,14 @@ button:hover > i{
 }
 
 button > i{
-    color: #102F5e;
+    color: #3D43A9;
     font-weight: bold;
     pointer-events: none; /*Com essa opção de clicar no icone o evento também vai ser disparado, desabilitandos os eventos do icone*/
 }
 
 input, select{
+    border-radius: 5px;
+    border: 2px solid #3D43A9;
     padding: .25rem;  /*Afastar o placeholder da margem do input e select*/
 }
 .hide{
@@ -50,7 +53,7 @@ input, select{
 .todo_container{
     max-width: 450px;
     margin: 3rem auto;
-    background-color: #fdfdfd;
+    background-color: #ffffff;
     padding: 1.5rem;
     border-radius: 15px;
 }
@@ -60,6 +63,7 @@ input, select{
     padding: 0 1rem 1rem;
     border-bottom: 1px solid #ccc;
 }
+
 
 /* Todo Header */
 
@@ -136,7 +140,7 @@ input, select{
     margin-left: .4rem;
 }
 .done{
-    background-color: #395169;
+    background-color: #0fa51c;
 }
 .done h3{
     color: #fff;
