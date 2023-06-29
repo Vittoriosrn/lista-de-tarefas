@@ -44,9 +44,6 @@ input, select{
     border: 2px solid #3D43A9;
     padding: .25rem;  /*Afastar o placeholder da margem do input e select*/
 }
-.hide{
-    display: none; /*Esconder o fomulario de edição*/
-}
 
 /* Todo Header */
 
@@ -145,4 +142,7 @@ input, select{
 .done h3{
     color: #fff;
     text-decoration: line-through;  /*Linha passando por cima do texto*/
+}
+.hide{
+    display: none; /*Esconder o fomulario de edição*/
 }

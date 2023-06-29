@@ -117,19 +117,20 @@ edit_form.addEventListener("submit", (e) => { // Editar tafera ao clicar no botÃ
 filter_select.addEventListener("change", (e) => {
     const filtro_selected = e.target.value  // Pega o valor selecionado do select
     const todo = document.querySelector(".todo")
+    const todo_done = document.querySelector(".done")
     console.log(filtro_selected)
 
 
     switch (filtro_selected) { 
         case "all":
-            
+            todo.classList.add("hide")
+            todo.classList.remove("hide")
         break
-        
         case "done":
-            todo.classList.toggle("hide")
+            todo.classList.remove("hide")
+            todo_done.classList.add("hide")
             console.log(todo)
         break
-
         case "todo":
             todo.classList.toggle("hide")
     }
