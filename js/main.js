@@ -156,12 +156,14 @@ filter_select.addEventListener("change", (e) => {
 search_input.addEventListener("keyup", (e) => { // Executar evento ao digitar no input de pesquisa
    const todos = document.querySelectorAll(".todo")
    const input_search = document.querySelector("#search_input").innerText
-   for(let i = 0; i < input_search.lenght; i++){
+   for(let i = 0; i < todos.length; i++){
         const todo_txt = todos[i].innerText
-        if(todo_txt == input_search){
-            todos[i].classList.remove("hide")
-        }else{
-            todos[i].classList.add("hide")
+        for(let j = 0; j < todo_txt.length; j++){
+            if(todo_txt[j] == input_search){
+                todos[i].classList.remove("hide")
+            }else{
+                todos[i].classList.add("hide")
+            }
         }
    }
 })
