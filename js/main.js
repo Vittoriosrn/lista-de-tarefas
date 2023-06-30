@@ -73,6 +73,8 @@ todo_form.addEventListener("submit", (e) => {  // Adicionar nova tarefa
 document.addEventListener("click", (e) => {     // Detectar eventos de cliques nos botões
     const target_element = e.target  // Aqui identificamos o item clicado
     const parent_element = target_element.closest("div") // selecionei o elemento pai mais proximo
+    const filtro = document.querySelector("#filter_select")
+    const filtro_selected = filtro.options[filtro.selectedIndex].value
     let todo_title;
 
     if(parent_element && parent_element.querySelector("h3")){           // Verifica se contem um texto no parent_element
@@ -80,12 +82,16 @@ document.addEventListener("click", (e) => {     // Detectar eventos de cliques n
     }
     // Finalizar tarefa
     if(target_element.classList.contains("finish_todo")){
-        console.log("Clicou para finalizar")
         parent_element.classList.toggle("done") // se tiver done tira, se não tiver coloca
+        if(filtro_selected == "todo"){   // Aqui verifica se o filtro está selecionado "A fazer" para ocutar a tarefa
+            parent_element.classList.add("hide")
+        }else if(filtro_selected ==  "done"){ // Se não, se tiver em "feitas" 
+            console.log(target_element)
+            parent_element.classList.add("hide")
+        }
     }
     // Remover tarefa
     if(target_element.classList.contains("remove_todo")){
-        console.log("Tarefa removida")
         parent_element.remove() // Remover elemento pai
     }
     // Mostrar painel de edição da tarefa
@@ -116,23 +122,33 @@ edit_form.addEventListener("submit", (e) => { // Editar tafera ao clicar no bot�
 
 filter_select.addEventListener("change", (e) => {
     const filtro_selected = e.target.value  // Pega o valor selecionado do select
-    const todo = document.querySelector(".todo")
-    const todo_done = document.querySelector(".done")
-    console.log(filtro_selected)
-
+    const todo = document.querySelectorAll(".todo")
 
     switch (filtro_selected) { 
         case "all":
-            todo.classList.add("hide")
-            todo.classList.remove("hide")
+            for(let i = 0; i < todo.length; i++){  // Esse for percorre todas as tarefas selecionando seu indice e alterando a classe
+                if(todo[i].classList.contains("hide")){
+                    todo[i].classList.remove("hide")
+                }
+            }
         break
         case "done":
-            todo.classList.remove("hide")
-            todo_done.classList.add("hide")
-            console.log(todo)
+            for(let i = 0; i < todo.length; i++){
+                if(todo[i].classList.contains("done")){
+                    todo[i].classList.remove("hide")
+                }else{
+                    todo[i].classList.add("hide")
+                }
+            }
         break
         case "todo":
-            todo.classList.toggle("hide")
+            for(let i = 0; i < todo.length; i++){
+                if(todo[i].classList.contains("done")){
+                    todo[i].classList.add("hide")
+                }else{
+                    todo[i].classList.remove("hide")
+                }
+            }
     }
 })
 
