@@ -7,12 +7,13 @@ const edit_input = document.querySelector('#edit_input')
 const filter_select = document.querySelector('#filter_select')
 const cancel_edit_btn = document.querySelector('.cancel_edit_btn')
 const search_input =  document.querySelector("#search_input")
+const erase_button = document.querySelector("#erase_button")
 
 let old_input_value
 
 //------------------ Funções -----------------------//
 
-const save_todo = (text) =>{
+const save_todo = (text) =>{ // Função para adicionar nova tarefa
     const todo = document.createElement("div")
     todo.classList.add("todo") // Adiciona classe "todo" à div
 
@@ -46,7 +47,7 @@ const toggleForm = () =>{ // Função para mostrar a edição
     todo_list.classList.toggle("hide")
 }
 
-const uptdateTodo = (text) => {
+const uptdateTodo = (text) => { // Função para editar
     const todos = document.querySelectorAll(".todo") // Seleciona todos os todos/tarefas
 
     todos.forEach((todo) => {
@@ -59,19 +60,7 @@ const uptdateTodo = (text) => {
 
 }
 
-//------------------- Eventos -----------------------//
-
-todo_form.addEventListener("submit", (e) => {  // Adicionar nova tarefa
-    e.preventDefault() // Fez com que o evento (e) seja cancelado
-    // ^^^^  Faz com que envie o formulário sem recarregar a página
-
-    const input_value = todo_input.value
-    if(input_value){ // Verifica se não está vazio e chama a função para salvar a tarefa
-        save_todo(input_value)
-    }
-})
-
-document.addEventListener("click", (e) => {     // Detectar eventos de cliques nos botões
+const todo_buttons = (e) => {  // Função dos botões da tarefa. Concluir, editar e excluir
     const target_element = e.target  // Aqui identificamos o item clicado
     const parent_element = target_element.closest("div") // selecionei o elemento pai mais proximo
     const filtro = document.querySelector("#filter_select")
@@ -102,26 +91,9 @@ document.addEventListener("click", (e) => {     // Detectar eventos de cliques n
         edit_input.value = todo_title
         old_input_value = todo_title
     }
-})
+}
 
-cancel_edit_btn.addEventListener("click", (e) => {  // Clicou no botao cancelar edição
-    e.preventDefault() //  Não enviar formulário
-
-    toggleForm()
-})
-
-edit_form.addEventListener("submit", (e) => { // Editar tafera ao clicar no botão de enviar
-    e.preventDefault()
-
-    const edit_input_value = edit_input.value
-
-    if(edit_input_value){
-        uptdateTodo(edit_input_value)
-    }
-    toggleForm()
-})
-
-filter_select.addEventListener("change", (e) => {
+const filtrar = (e) =>{  // Função para filtrar tarefas
     const filtro_selected = e.target.value  // Pega o valor selecionado do select
     const todo = document.querySelectorAll(".todo")
 
@@ -151,22 +123,76 @@ filter_select.addEventListener("change", (e) => {
                 }
             }
     }
+}
+
+const search = () => {  // Função de pesquisa de tarefas
+    const todos = document.querySelectorAll(".todo")
+    const input_search = search_input.value.toLowerCase() // Pegar texto em letras minusculas
+    for(let i = 0; i < todos.length; i++){
+        const todo_txt = todos[i].innerText.toLowerCase()
+        console.log(input_search)
+        console.log(todo_txt)
+        if(todo_txt.includes(input_search)){
+            if(filter_select.value == "all"){
+                todos[i].classList.remove("hide")
+            }else if(filter_select.value == "done" && !todos[i].classList.contains("hide")){
+                todos[i].classList.remove("hide")
+            }else if(filter_select.value == "todo" && !todos[i].classList.contains("hide")){
+                todos[i].classList.remove("hide")
+            }
+        }else{
+            todos[i].classList.add("hide")
+        }
+    }
+}
+
+//------------------- Eventos -----------------------//
+
+todo_form.addEventListener("submit", (e) => {  // Adicionar nova tarefa
+    e.preventDefault() // Fez com que o evento (e) seja cancelado
+    // ^^^^  Faz com que envie o formulário sem recarregar a página
+
+    const input_value = todo_input.value
+    if(input_value){ // Verifica se não está vazio e chama a função para salvar a tarefa
+        save_todo(input_value)
+    }
+})
+
+document.addEventListener("click", (e) => {     // Detectar eventos de cliques nos botões das terfas
+    todo_buttons(e)
+})
+
+cancel_edit_btn.addEventListener("click", (e) => {  // Clicou no botao cancelar edição
+    e.preventDefault() //  Não enviar formulário
+
+    toggleForm()
+})
+
+edit_form.addEventListener("submit", (e) => { // Editar tafera ao clicar no botão de enviar
+    e.preventDefault()
+
+    const edit_input_value = edit_input.value
+
+    if(edit_input_value){
+        uptdateTodo(edit_input_value)
+    }
+    toggleForm()
+})
+
+filter_select.addEventListener("change", (e) => { // Evento ao selecionar o filtro
+    filtrar(e)
 })
 
 search_input.addEventListener("keyup", (e) => { // Executar evento ao digitar no input de pesquisa
-   const todos = document.querySelectorAll(".todo")
-   const input_search = document.querySelector("#search_input").innerText
-   for(let i = 0; i < todos.length; i++){
-        const todo_txt = todos[i].innerText
-        for(let j = 0; j < todo_txt.length; j++){
-            if(todo_txt[j] == input_search){
-                todos[i].classList.remove("hide")
-            }else{
-                todos[i].classList.add("hide")
-            }
-        }
-   }
+    search()
 })
 
+erase_button.addEventListener("click", (e) => {
+    e.preventDefault()
+
+    search_input.value = ""
+    search_input.focus()
+
+})
 
 
