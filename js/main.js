@@ -6,6 +6,7 @@ const edit_form = document.querySelector('#edit_form')
 const edit_input = document.querySelector('#edit_input')
 const filter_select = document.querySelector('#filter_select')
 const cancel_edit_btn = document.querySelector('.cancel_edit_btn')
+const search_input =  document.querySelector("#search_input")
 
 let old_input_value
 
@@ -151,5 +152,19 @@ filter_select.addEventListener("change", (e) => {
             }
     }
 })
+
+search_input.addEventListener("keyup", (e) => { // Executar evento ao digitar no input de pesquisa
+   const todos = document.querySelectorAll(".todo")
+   const input_search = document.querySelector("#search_input").innerText
+   for(let i = 0; i < input_search.lenght; i++){
+        const todo_txt = todos[i].innerText
+        if(todo_txt == input_search){
+            todos[i].classList.remove("hide")
+        }else{
+            todos[i].classList.add("hide")
+        }
+   }
+})
+
 
 
