@@ -130,14 +130,12 @@ const search = () => {  // Função de pesquisa de tarefas
     const input_search = search_input.value.toLowerCase() // Pegar texto em letras minusculas
     for(let i = 0; i < todos.length; i++){
         const todo_txt = todos[i].innerText.toLowerCase()
-        console.log(input_search)
-        console.log(todo_txt)
         if(todo_txt.includes(input_search)){
             if(filter_select.value == "all"){
                 todos[i].classList.remove("hide")
-            }else if(filter_select.value == "done" && !todos[i].classList.contains("hide")){
+            }else if(filter_select.value == "done" && todos[i].classList.contains("done")){
                 todos[i].classList.remove("hide")
-            }else if(filter_select.value == "todo" && !todos[i].classList.contains("hide")){
+            }else if(filter_select.value == "todo" && !todos[i].classList.contains("done")){
                 todos[i].classList.remove("hide")
             }
         }else{
