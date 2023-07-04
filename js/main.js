@@ -191,5 +191,3 @@ erase_button.addEventListener("click", (e) => {
     search() // Chamo a função de pesquisa para atualizar a lista
     search_input.focus()
 })
-
-
