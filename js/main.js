@@ -187,10 +187,9 @@ search_input.addEventListener("keyup", (e) => { // Executar evento ao digitar no
 
 erase_button.addEventListener("click", (e) => {
     e.preventDefault()
-
     search_input.value = ""
+    search() // Chamo a função de pesquisa para atualizar a lista
     search_input.focus()
-
 })
 
 
